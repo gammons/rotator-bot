@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  redis:
+    image: redis:latest
+    command: redis-server --appendonly yes
+    volumes:
+      - ../data/redis:/data
+
+  app:
+    build: ./
+    command: "ruby bot.rb"
+    depends_on:
+      - redis
